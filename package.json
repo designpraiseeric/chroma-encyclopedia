@@ -1,8 +1,8 @@
 {
-  "name": "chroma-encyclopedia",
+  "name": "colored-lens",
   "version": "1.0.0",
   "private": true,
-  "description": "Chroma: Cinematic Color Encyclopedia, offline web app and Android build",
+  "description": "Colored Lens: Cinematic Color Encyclopedia, offline web app and Android build",
   "scripts": {
     "build": "python3 tools/build.py src"
   },

@@ -1,6 +1,6 @@
 {
   "appId": "com.designpraise.chroma",
-  "appName": "Chroma",
+  "appName": "Colored Lens",
   "webDir": "www",
   "backgroundColor": "#050507",
   "android": { "backgroundColor": "#050507" }

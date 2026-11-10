@@ -29,11 +29,11 @@ for fam,dir_,ws,ital in (('Inter','inter',(300,400,500,600),False),('Playfair Di
 A=os.path.join(ROOT,'assets')
 for f in ('pwa-192.png','pwa-512.png','pwa-maskable-512.png','apple-touch-icon.png','favicon.png'):shutil.copy(f'{A}/{f}',f'{W}/icons/{f}')
 # 5 html
-h=open(f'{SRC}/chroma_encyclopedia.html',encoding='utf-8').read()
+h=open(f'{SRC}/colored_lens.html',encoding='utf-8').read()
 h=re.sub(r'<link href="https://fonts.googleapis.com[^>]*>','<style>'+''.join(css)+'</style>',h)
 head='''<meta name="theme-color" content="#050507"><meta name="color-scheme" content="dark">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/favicon.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Chroma">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Colored Lens">
 <script>window.STILLS=%s</script>'''%json.dumps(stills)
 h=h.replace('<meta name="viewport" content="width=device-width, initial-scale=1.0">','<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">\n'+head,1)
 # tiles: load a user still only if it exists, otherwise go straight to the AI re-enactment (no 404 chain offline)
@@ -54,7 +54,7 @@ h=h.replace('</style>','#offbar{position:fixed;top:0;left:0;right:0;z-index:50;b
 i=h.rfind('</body>');h=h[:i]+sw+h[i:]
 open(f'{W}/index.html','w',encoding='utf-8').write(h)
 # 6 manifest
-json.dump({"name":"Chroma: Cinematic Color Encyclopedia","short_name":"Chroma","description":"Offline reference on color in film: hue psychology, palettes, narrative devices, auteurs, with Nigerian-context frames.","start_url":"./","scope":"./","display":"standalone","orientation":"any","background_color":"#050507","theme_color":"#050507","categories":["education","reference","photo"],
+json.dump({"name":"Colored Lens: Cinematic Color Encyclopedia","short_name":"Colored Lens","description":"Offline reference on color in film: hue psychology, palettes, narrative devices, auteurs, with Nigerian-context frames.","start_url":"./","scope":"./","display":"standalone","orientation":"any","background_color":"#050507","theme_color":"#050507","categories":["education","reference","photo"],
  "icons":[{"src":"icons/pwa-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/pwa-512.png","sizes":"512x512","type":"image/png"},{"src":"icons/pwa-maskable-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]},open(f'{W}/manifest.webmanifest','w'),indent=1)
 # 7 service worker: precache everything, versioned by content hash
 files=[]
@@ -65,7 +65,7 @@ for dp,_,fs in os.walk(W):
 files.sort();hs=hashlib.sha1()
 for f in files:hs.update(f.encode());hs.update(open(os.path.join(W,f),'rb').read())
 ver=hs.hexdigest()[:10]
-open(f'{W}/sw.js','w').write(f'''const V="chroma-{ver}",FILES={json.dumps(["./"]+files)};
+open(f'{W}/sw.js','w').write(f'''const V="coloredlens-{ver}",FILES={json.dumps(["./"]+files)};
 self.addEventListener("install",e=>{{e.waitUntil(caches.open(V).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))}});
 self.addEventListener("activate",e=>{{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))}});
 self.addEventListener("fetch",e=>{{const u=new URL(e.request.url);if(e.request.method!=="GET"||u.origin!==location.origin)return;

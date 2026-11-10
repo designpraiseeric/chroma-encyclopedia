@@ -1,4 +1,4 @@
-# Chroma: Cinematic Color Encyclopedia
+# Colored Lens: Cinematic Color Encyclopedia
 
 An offline reference on color in film (hue psychology, palette structures, narrative devices, auteur signatures, processes, skin and exposure) with Nigerian-context frames and an annotated bibliography. By DesignPraise Studio.
 

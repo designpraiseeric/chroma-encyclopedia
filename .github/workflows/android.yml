@@ -36,15 +36,15 @@ jobs:
       - name: Build APK
         working-directory: android
         run: ./gradlew assembleDebug --no-daemon
-      - run: cp android/app/build/outputs/apk/debug/app-debug.apk Chroma-1.0.${{ github.run_number }}.apk
+      - run: cp android/app/build/outputs/apk/debug/app-debug.apk ColoredLens-1.0.${{ github.run_number }}.apk
       - uses: actions/upload-artifact@v4
-        with: { name: Chroma-apk, path: 'Chroma-*.apk' }
+        with: { name: ColoredLens-apk, path: 'ColoredLens-*.apk' }
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.0.${{ github.run_number }}
-          name: Chroma 1.0.${{ github.run_number }}
+          name: Colored Lens 1.0.${{ github.run_number }}
           body: |
             Android app, fully offline. Download the .apk on your phone, open it and allow "Install unknown apps" for your browser or file manager when asked.
-            Web version: https://designpraiseeric.github.io/chroma-encyclopedia/
-          files: Chroma-*.apk
+            Web version: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          files: ColoredLens-*.apk
           make_latest: true
