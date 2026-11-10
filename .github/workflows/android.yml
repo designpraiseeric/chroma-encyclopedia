@@ -16,7 +16,6 @@ jobs:
         with: { python-version: '3.12' }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '21' }
-      - uses: android-actions/setup-android@v3
       - run: pip install pillow
       - run: npm ci
       - run: npm run build
@@ -32,6 +31,8 @@ jobs:
           sed -i "s/versionName \"[^\"]*\"/versionName \"1.0.${{ github.run_number }}\"/" android/app/build.gradle
       - name: Stable signing key (so updates install over the old version)
         run: mkdir -p ~/.android && cp android-keystore/chroma-debug.keystore ~/.android/debug.keystore
+      - name: Accept SDK licences
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
       - name: Build APK
         working-directory: android
         run: ./gradlew assembleDebug --no-daemon
