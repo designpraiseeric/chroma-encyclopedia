@@ -1,0 +1,7 @@
+{
+  "appId": "com.designpraise.chroma",
+  "appName": "Chroma",
+  "webDir": "www",
+  "backgroundColor": "#050507",
+  "android": { "backgroundColor": "#050507" }
+}
