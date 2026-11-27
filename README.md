@@ -16,3 +16,7 @@ All film-reference frames are **AI re-enactments**: the scene's lighting, palett
 - `.github/workflows/` deploys `www/` to GitHub Pages and builds the Android APK on every push to `main`.
 
 Local build: `npm ci && pip install pillow && npm run build`, then serve `www/` with any static server.
+
+## License
+
+Code is MIT licensed (see [LICENSE](LICENSE)). Film titles and the FILMGRAB stills they link to belong to their owners.
